@@ -1,18 +1,23 @@
 import { useState, useEffect } from "react";
 import { getArticles } from "../api";
 import moment from "moment";
+import { Link } from "react-router-dom";
+import Loading from "./Loading";
 
-function ArticleCard() {
+function AllArticles() {
   const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getArticles().then((data) => {
-      console.log(data.articles);
       setArticles(data.articles);
+      setIsLoading(false);
     });
   }, []);
 
-  console.log();
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -27,10 +32,18 @@ function ArticleCard() {
                 <h5>
                   {moment(article.created_at).format("MMMM Do YYYY, h:mm a")}
                 </h5>
-                <img src={article.article_img_url} alt={article.topic} />
+                <img
+                  src={article.article_img_url}
+                  alt={article.topic}
+                  className="article-preview-image"
+                />
                 <div>
-                  <p>{article.votes}</p>
-                  <button>👍</button>
+                  <button>
+                    <p>{article.votes}</p>👍
+                  </button>
+                  <Link to={`/nc-news/${article.article_id}`}>
+                    Read Article
+                  </Link>
                   <p>{article.comment_count}</p>
                 </div>
               </li>
@@ -42,4 +55,4 @@ function ArticleCard() {
   );
 }
 
-export default ArticleCard;
+export default AllArticles;
