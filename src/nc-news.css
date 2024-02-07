@@ -1,3 +1,8 @@
 li {
-    list-style: none;
+  list-style: none;
+}
+
+.navbar-item,
+.topics {
+  display: inline-block;
 }
