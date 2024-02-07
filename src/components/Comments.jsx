@@ -20,8 +20,6 @@ function Comments() {
     return <Loading />;
   }
 
-  console.log(articleComments);
-
   return (
     <>
       <div>
