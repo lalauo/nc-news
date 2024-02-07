@@ -6,3 +6,9 @@ li {
 .topics {
   display: inline-block;
 }
+
+.comment {
+  border: 2px solid white;
+  border-radius: 6px;
+  margin: 20px;
+}

@@ -37,15 +37,11 @@ function AllArticles() {
                   alt={article.topic}
                   className="article-preview-image"
                 />
-                <div>
-                  <button>
-                    <p>{article.votes}</p>👍
-                  </button>
-                  <Link to={`/nc-news/${article.article_id}`}>
-                    Read Article
-                  </Link>
-                  <p>{article.comment_count}</p>
-                </div>
+                <button>
+                  <p>{article.votes}</p>👍
+                </button>
+                <Link to={`/nc-news/${article.article_id}`}>Read Article</Link>
+                <p>{article.comment_count}</p>
               </li>
             );
           })}

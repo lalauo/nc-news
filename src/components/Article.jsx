@@ -3,12 +3,13 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getSingleArticle } from "../api";
 import Loading from "./Loading";
+import Comments from "./Comments";
 
 function Article() {
   const { article_id } = useParams();
   const [article, setArticle] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [showComments, setShowComments] = useState(false);
 
   useEffect(() => {
     getSingleArticle(article_id).then((data) => {
@@ -17,11 +18,15 @@ function Article() {
     });
   }, [article_id]);
 
-    if (isLoading) {
-      return <Loading />;
-    }
-    
-    return (
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  const handleShowComments = () => {
+    setShowComments(!showComments);
+  };
+
+  return (
     <>
       <div className="single-article">
         <h2>{article.title}</h2>
@@ -35,6 +40,10 @@ function Article() {
         />
         <p>{article.body}</p>
         <p>{article.comment_count}</p>
+        <button onClick={handleShowComments}>
+          {showComments ? "Hide" : "Show"} Comments
+        </button>
+        {showComments && <Comments />}
       </div>
     </>
   );
