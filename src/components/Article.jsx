@@ -2,18 +2,26 @@ import moment from "moment";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getSingleArticle } from "../api";
+import Loading from "./Loading";
 
 function Article() {
   const { article_id } = useParams();
   const [article, setArticle] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
     getSingleArticle(article_id).then((data) => {
       setArticle(data.article);
+      setIsLoading(false);
     });
   }, [article_id]);
 
-  return (
+    if (isLoading) {
+      return <Loading />;
+    }
+    
+    return (
     <>
       <div className="single-article">
         <h2>{article.title}</h2>

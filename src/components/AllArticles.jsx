@@ -2,15 +2,22 @@ import { useState, useEffect } from "react";
 import { getArticles } from "../api";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import Loading from "./Loading";
 
 function AllArticles() {
   const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getArticles().then((data) => {
       setArticles(data.articles);
+      setIsLoading(false);
     });
   }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -34,7 +41,9 @@ function AllArticles() {
                   <button>
                     <p>{article.votes}</p>👍
                   </button>
-                  <Link to={`/nc-news/${article.article_id}`}>Read Article</Link>
+                  <Link to={`/nc-news/${article.article_id}`}>
+                    Read Article
+                  </Link>
                   <p>{article.comment_count}</p>
                 </div>
               </li>
