@@ -21,12 +21,12 @@ function AllArticles() {
     setSearchParams(newParams);
   };
 
-    useEffect(() => {
-      getArticles().then((data) => {
-        setArticles(data.articles);
-        setIsLoading(false);
-      });
-    }, []);
+  useEffect(() => {
+    getArticles().then((data) => {
+      setArticles(data.articles);
+      setIsLoading(false);
+    });
+  }, []);
 
   useEffect(() => {
     getTopics(topicQuery).then((data) => {
@@ -59,11 +59,14 @@ function AllArticles() {
                   className="article-preview-image"
                 />
                 <div>
-                  <button>
-                    <p>{article.votes}</p>👍
-                  </button>
-                  <Link to={`/${article.article_id}`}>Read Article</Link>
-                  <p>{article.comment_count}</p>
+                  <ul>
+                    <li>Votes: {article.votes}</li>
+                    <li>
+                      {" "}
+                      <Link to={`/${article.article_id}`}>Read Article</Link>
+                    </li>
+                    <li>Comments: {article.comment_count}</li>
+                  </ul>
                 </div>
               </li>
             );

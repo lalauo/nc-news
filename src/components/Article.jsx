@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { getSingleArticle } from "../api";
 import Loading from "./Loading";
 import Comments from "./Comments";
+import Votes from "./Votes";
 
 function Article() {
   const { article_id } = useParams();
@@ -28,7 +29,7 @@ function Article() {
 
   return (
     <>
-       <div className="single-article">
+      <div className="single-article">
         <h3>{article.title}</h3>
         <h4>by {article.author}</h4>
         <h5>{article.topic}</h5>
@@ -39,7 +40,12 @@ function Article() {
           className="single-article-image"
         />
         <p>{article.body}</p>
-        <p>{article.comment_count}</p>
+
+        <div>
+          <Votes />
+          <p>Comments: {article.comment_count}</p>
+        </div>
+
         <button onClick={handleShowComments}>
           {showComments ? "Hide" : "Show"} Comments
         </button>
