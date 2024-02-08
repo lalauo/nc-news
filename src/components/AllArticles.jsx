@@ -1,19 +1,39 @@
 import { useState, useEffect } from "react";
-import { getArticles } from "../api";
-import moment from "moment";
+import { useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+
+import moment from "moment";
+
+import { getArticles, getTopics } from "../api";
+
 import Loading from "./Loading";
+import Topics from "./Navigation/Topics";
 
 function AllArticles() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const topicQuery = searchParams.get("topic");
+
+  const setTopic = (topic) => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("topic", topic);
+    setSearchParams(newParams);
+  };
+
+    useEffect(() => {
+      getArticles().then((data) => {
+        setArticles(data.articles);
+        setIsLoading(false);
+      });
+    }, []);
 
   useEffect(() => {
-    getArticles().then((data) => {
+    getTopics(topicQuery).then((data) => {
       setArticles(data.articles);
       setIsLoading(false);
     });
-  }, []);
+  }, [topicQuery]);
 
   if (isLoading) {
     return <Loading />;
@@ -21,6 +41,7 @@ function AllArticles() {
 
   return (
     <>
+      <Topics setTopic={setTopic} />
       <div className="article-card">
         <ul>
           {articles.map((article) => {
@@ -37,11 +58,13 @@ function AllArticles() {
                   alt={article.topic}
                   className="article-preview-image"
                 />
-                <button>
-                  <p>{article.votes}</p>👍
-                </button>
-                <Link to={`/nc-news/${article.article_id}`}>Read Article</Link>
-                <p>{article.comment_count}</p>
+                <div>
+                  <button>
+                    <p>{article.votes}</p>👍
+                  </button>
+                  <Link to={`/${article.article_id}`}>Read Article</Link>
+                  <p>{article.comment_count}</p>
+                </div>
               </li>
             );
           })}

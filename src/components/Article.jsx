@@ -28,9 +28,9 @@ function Article() {
 
   return (
     <>
-      <div className="single-article">
-        <h2>{article.title}</h2>
-        <h3>by {article.author}</h3>
+       <div className="single-article">
+        <h3>{article.title}</h3>
+        <h4>by {article.author}</h4>
         <h5>{article.topic}</h5>
         <h5>{moment(article.created_at).format("MMMM Do YYYY, h:mm a")}</h5>
         <img

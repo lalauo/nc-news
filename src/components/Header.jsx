@@ -1,23 +1,11 @@
+import { Link } from "react-router-dom";
+import Navbar from "./Navigation/Navbar";
+
 function Header() {
   return (
     <section>
-      <h1>NC NEWS</h1>
-      <div>
-        <ul>
-          <li className="topics">
-            {" "}
-            <button>Coding</button>
-          </li>
-          <li className="topics">
-            {" "}
-            <button>Football</button>
-          </li>
-          <li className="topics">
-            {" "}
-            <button>Cooking</button>
-          </li>
-        </ul>
-      </div>
+      <Navbar />
+      <h1 className="main-header">NC NEWS</h1>
     </section>
   );
 }
