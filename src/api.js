@@ -23,3 +23,11 @@ export const getComments = (ID) => {
       return response.data;
     });
 };
+
+export const getTopics = (topic) => {
+  return axios
+    .get(`https://news-api-9mot.onrender.com/api/articles?topic=${topic}`)
+    .then((response) => {
+      return response.data;
+    });
+};
