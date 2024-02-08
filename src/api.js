@@ -31,3 +31,15 @@ export const getTopics = (topic) => {
       return response.data;
     });
 };
+
+export const incrementVotes = (vote, ID) => {
+  const vote = {
+    vote: 1,
+  };
+  return axios
+    .patch(`https://news-api-9mot.onrender.com/api/articles/${ID}`, vote)
+    .then((response) => {
+      console.log(response.data);
+      return response.data;
+    });
+};
