@@ -31,7 +31,7 @@ export default function Votes({ votes, article_id }) {
       <p>{votes + localVotes}</p>
       {stateError ? (
         <p>
-          Oops! Looks like voting isn't working right now. Please try again
+          Oops! Looks like voting isn't available right now. Please try again
           later.{" "}
         </p>
       ) : null}
