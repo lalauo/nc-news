@@ -32,11 +32,14 @@ export const getTopics = (topic) => {
     });
 };
 
-export const patchVotes = (ID, vote) => {
-  const updateVote = { inc_votes: vote };
+export const incrementVotes = (vote, ID) => {
+  const vote = {
+    vote: 1,
+  };
   return axios
-    .patch(`https://news-api-9mot.onrender.com/api/articles/${ID}`, updateVote)
+    .patch(`https://news-api-9mot.onrender.com/api/articles/${ID}`, vote)
     .then((response) => {
+      console.log(response.data);
       return response.data;
     });
 };
