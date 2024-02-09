@@ -42,7 +42,7 @@ function Article() {
         <p>{article.body}</p>
 
         <div>
-          <Votes />
+          <Votes votes={article.votes} article_id={article_id} />
           <p>Comments: {article.comment_count}</p>
         </div>
 
