@@ -32,11 +32,9 @@ function Comments() {
                   {moment(comment.created_at).format("MMMM Do YYYY, h:mm a")}
                 </h6>
                 <p>{comment.body}</p>
-                <section>
-                  <button>👍</button>
-                  <p>7</p>
-                  <button>👎</button>
-                </section>
+                <button>
+                  <p>{comment.votes}</p>👍
+                </button>
                 <button>DELETE</button>
               </li>
             );
